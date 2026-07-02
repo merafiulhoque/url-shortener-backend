@@ -4,7 +4,6 @@ export interface HelperResponse<T> {
     success: boolean
     message: string
     data?: T
-    error?: T
 }
 
 export interface JWT_PAYLOAD extends JwtPayload {

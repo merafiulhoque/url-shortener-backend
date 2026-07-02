@@ -26,12 +26,6 @@ export async function loginController(req: Request, res: Response){
     const token = generateToken(loginHelperResponse.data)
     return res
         .status(200)
-        .cookie("token", token, {
-            httpOnly: true,
-            sameSite: "none",
-            secure: AppConfig.NODE_ENV === "production",
-            path: "/",
-            maxAge: 3600000            
-        })
         .json(loginHelperResponse)
+    
 }
