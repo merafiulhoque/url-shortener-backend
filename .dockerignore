@@ -1,0 +1,7 @@
+generated/
+node_modules/
+.env
+dockerfile
+dist
+.gitignore
+README.md

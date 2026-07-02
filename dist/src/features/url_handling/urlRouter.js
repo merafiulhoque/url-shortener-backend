@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { getUser } from "../../middleware/getUser.js";
+import { getAllUrlController } from "./getShortenedUrls.ts/url.controller.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
+import { createNewUrlController } from "./createShortUrl.ts/shorten.controller.js";
+import { deleteController } from "./deleteShortUrl/deleteController.js";
+export const urlRouter = Router();
+urlRouter.use(getUser);
+urlRouter.get("/get-all-urls", asyncHandler(getAllUrlController));
+urlRouter.post("/create-new-url", asyncHandler(createNewUrlController));
+urlRouter.delete("/delete-url", asyncHandler(deleteController));
