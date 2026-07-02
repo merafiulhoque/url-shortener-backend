@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ quiet: true, debug: false, });
 const DATABASE_URL = process.env.DATABASE_URL;
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 const PORT = Number(process.env.PORT || 5050);

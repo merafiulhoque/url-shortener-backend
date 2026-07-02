@@ -18,7 +18,10 @@ COPY --from=deps /app/node_modules ./node_modules
 
 COPY . .
 
-RUN npx prisma generate
+ARG DIRECT_URL
+ENV DIRECT_URL=${DIRECT_URL}
+
+RUN npm run db:deploy
 
 RUN npm run build
 
@@ -37,7 +40,8 @@ RUN npm ci --omit=dev
 
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/prisma.config.ts ./prisma.config.ts
 
 EXPOSE 5000
 
-CMD [ "sh", "-c", "npx prisma migrate deploy && node dist/src/server.js" ]
+CMD [ "node", "dist/src/server.js" ]

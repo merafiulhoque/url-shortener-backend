@@ -1,9 +1,11 @@
-import {PrismaClient} from "../../generated/prisma/client.ts"
-import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../generated/prisma/client.ts"
+import { PrismaNeon } from "@prisma/adapter-neon";
 import { AppConfig } from "../AppConfig.ts";
 
-const adapter = new PrismaPg({
+
+const adapter = new PrismaNeon({
     connectionString: AppConfig.DATABASE_URL,
+
 })
 
 export const prisma = new PrismaClient({

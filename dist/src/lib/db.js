@@ -1,7 +1,7 @@
-import { PrismaClient } from "../../generated/prisma/client.js";
-import { PrismaPg } from "@prisma/adapter-pg";
+import { PrismaClient } from "../generated/prisma/client.js";
+import { PrismaNeon } from "@prisma/adapter-neon";
 import { AppConfig } from "../AppConfig.js";
-const adapter = new PrismaPg({
+const adapter = new PrismaNeon({
     connectionString: AppConfig.DATABASE_URL,
 });
 export const prisma = new PrismaClient({
