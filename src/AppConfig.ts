@@ -14,6 +14,7 @@ if (!JWT_SECRET_KEY) {
 }
 
 export const AppConfig = {
+  NODE_ENV: process.env.NODE_ENV!,
   PORT,
   DATABASE_URL,
   JWT_SECRET_KEY,

@@ -4,6 +4,7 @@ import { UserSignUpData } from "../../../schemas/SignUpSchema.ts";
 import { HelperResponse, JWT_PAYLOAD } from "../../../types/index.ts";
 import { generateToken } from "../../../utils/jwt.ts";
 import { AppError } from "../../../utils/errorHandler.ts";
+import { AppConfig } from "../../../AppConfig.ts";
 
 
 export async function loginController(req: Request, res: Response){
@@ -28,7 +29,7 @@ export async function loginController(req: Request, res: Response){
         .cookie("token", token, {
             httpOnly: true,
             sameSite: "lax",
-            secure: false,
+            secure: AppConfig.NODE_ENV === "production",
             path: "/",
             maxAge: 3600000            
         })
