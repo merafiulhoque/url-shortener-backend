@@ -28,7 +28,7 @@ export async function loginController(req: Request, res: Response){
         .status(200)
         .cookie("token", token, {
             httpOnly: true,
-            sameSite: "lax",
+            sameSite: "none",
             secure: AppConfig.NODE_ENV === "production",
             path: "/",
             maxAge: 3600000            
