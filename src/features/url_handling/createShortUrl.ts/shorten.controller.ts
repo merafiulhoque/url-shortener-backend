@@ -4,7 +4,6 @@ import { createNewShortenedURL } from "./shorten.service.ts";
 
 export async function createNewUrlController(req: Request, res: Response){
     const user = req.user;
-    console.log(user)
     if(!user || !user.id){
         return res.status(401).json({ message: "Unauthorized" });
     }
