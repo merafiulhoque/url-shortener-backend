@@ -22,6 +22,7 @@ export async function login(data: UserSignUpData): Promise<HelperResponse<JWT_PA
             password: true
         }
     })
+
     if(!user){
         return {
             success: false,
@@ -36,6 +37,7 @@ export async function login(data: UserSignUpData): Promise<HelperResponse<JWT_PA
         }
     }
     const safeData: JWT_PAYLOAD = getSafeData(user)
+    
     return {
         success: true,
         message: "Login Successfull",

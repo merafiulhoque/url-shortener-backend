@@ -10,6 +10,7 @@ export const authRouter = Router()
 authRouter.post("/signup", asyncHandler(signUpcontroller))
 authRouter.post("/signin", asyncHandler(loginController))
 authRouter.post("/signout", asyncHandler(signOut))
+
 authRouter.get("/get-user", getUser, (req, res) =>{
     const user = req.user
     if(!user || !user.id){

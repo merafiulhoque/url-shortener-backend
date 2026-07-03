@@ -5,6 +5,7 @@ import { HelperResponse, JWT_PAYLOAD } from "../../../types/index.ts";
 import { generateToken } from "../../../utils/jwt.ts";
 import { AppError } from "../../../utils/errorHandler.ts";
 import { AppConfig } from "../../../AppConfig.ts";
+import { success } from "zod";
 
 
 export async function loginController(req: Request, res: Response){
@@ -16,6 +17,7 @@ export async function loginController(req: Request, res: Response){
             message: "Invalid credentials"
         })
     }
+
     const loginHelperResponse: HelperResponse<JWT_PAYLOAD> = await login(loginData as UserSignUpData)
     if(!loginHelperResponse.success && !loginHelperResponse.data){
         return res.status(403).json(loginHelperResponse)
@@ -23,9 +25,17 @@ export async function loginController(req: Request, res: Response){
     if(!loginHelperResponse.data){
         throw new AppError(500, "Something went wrong...")
     }
+    
+
     const token = generateToken(loginHelperResponse.data)
+    
+
     return res
         .status(200)
-        .json(loginHelperResponse)
+        .json({
+            success: loginHelperResponse.success,
+            message: loginHelperResponse.message,
+            data: token
+        })
     
 }

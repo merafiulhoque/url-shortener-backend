@@ -1,26 +1,32 @@
 import { Request, Response, NextFunction } from "express";
+import { JsonWebTokenError } from "jsonwebtoken";
 import { error } from "node:console";
 
 
 export const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
-    // if(err instanceof AppError){
-    //     return res.status(err.statusCode).json({
-    //         success: false,
-    //         message: err.message + err.stack + err.cause 
-    //     })
-    // }
+    if(err instanceof AppError){
+        return res.status(err.statusCode).json({
+            success: false,
+            message: err.message
+        })
+    }
     
-    // if(err instanceof Error){
+    if(err instanceof Error){
+        return res.json({
+            success: false,
+            message: err.message
+        })
+    }
+
+    // if (err instanceof JsonWebTokenError){
     //     return res.json({
     //         success: false,
-    //         message: err.message + err.stack + err.cause
+    //         message: err.message
     //     })
     // }
-    console.error(err)
-
     return res.json({
             success: false,
-            message: err.message + err.stack + err.code
+            message: err.message
         })
 
 }
