@@ -8,9 +8,9 @@ export async function getAllUrlController(req: Request, res: Response){
     if(!user || !user.id){
         return res.status(401).json({ message: "Unauthorized" });
     }
-
+    let data = null
     //check data availabe in redis or not
-    const data = await redisClient.get(`user:${user.id}`)
+    data = await redisClient.get(`user:${user.id}`)
 
     //if no data exists then call db , get data and cache redis
     if(!data){
