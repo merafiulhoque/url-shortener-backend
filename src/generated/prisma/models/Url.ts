@@ -29,11 +29,13 @@ export type AggregateUrl = {
 export type UrlAvgAggregateOutputType = {
   id: number | null
   userId: number | null
+  clicks: number | null
 }
 
 export type UrlSumAggregateOutputType = {
   id: number | null
   userId: number | null
+  clicks: number | null
 }
 
 export type UrlMinAggregateOutputType = {
@@ -41,6 +43,7 @@ export type UrlMinAggregateOutputType = {
   originalUrl: string | null
   shortnedUrl: string | null
   userId: number | null
+  clicks: number | null
 }
 
 export type UrlMaxAggregateOutputType = {
@@ -48,6 +51,7 @@ export type UrlMaxAggregateOutputType = {
   originalUrl: string | null
   shortnedUrl: string | null
   userId: number | null
+  clicks: number | null
 }
 
 export type UrlCountAggregateOutputType = {
@@ -55,6 +59,7 @@ export type UrlCountAggregateOutputType = {
   originalUrl: number
   shortnedUrl: number
   userId: number
+  clicks: number
   _all: number
 }
 
@@ -62,11 +67,13 @@ export type UrlCountAggregateOutputType = {
 export type UrlAvgAggregateInputType = {
   id?: true
   userId?: true
+  clicks?: true
 }
 
 export type UrlSumAggregateInputType = {
   id?: true
   userId?: true
+  clicks?: true
 }
 
 export type UrlMinAggregateInputType = {
@@ -74,6 +81,7 @@ export type UrlMinAggregateInputType = {
   originalUrl?: true
   shortnedUrl?: true
   userId?: true
+  clicks?: true
 }
 
 export type UrlMaxAggregateInputType = {
@@ -81,6 +89,7 @@ export type UrlMaxAggregateInputType = {
   originalUrl?: true
   shortnedUrl?: true
   userId?: true
+  clicks?: true
 }
 
 export type UrlCountAggregateInputType = {
@@ -88,6 +97,7 @@ export type UrlCountAggregateInputType = {
   originalUrl?: true
   shortnedUrl?: true
   userId?: true
+  clicks?: true
   _all?: true
 }
 
@@ -182,6 +192,7 @@ export type UrlGroupByOutputType = {
   originalUrl: string
   shortnedUrl: string
   userId: number
+  clicks: number
   _count: UrlCountAggregateOutputType | null
   _avg: UrlAvgAggregateOutputType | null
   _sum: UrlSumAggregateOutputType | null
@@ -212,6 +223,7 @@ export type UrlWhereInput = {
   originalUrl?: Prisma.StringFilter<"Url"> | string
   shortnedUrl?: Prisma.StringFilter<"Url"> | string
   userId?: Prisma.IntFilter<"Url"> | number
+  clicks?: Prisma.IntFilter<"Url"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -220,6 +232,7 @@ export type UrlOrderByWithRelationInput = {
   originalUrl?: Prisma.SortOrder
   shortnedUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clicks?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -231,6 +244,7 @@ export type UrlWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UrlWhereInput | Prisma.UrlWhereInput[]
   originalUrl?: Prisma.StringFilter<"Url"> | string
   userId?: Prisma.IntFilter<"Url"> | number
+  clicks?: Prisma.IntFilter<"Url"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id" | "shortnedUrl">
 
@@ -239,6 +253,7 @@ export type UrlOrderByWithAggregationInput = {
   originalUrl?: Prisma.SortOrder
   shortnedUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clicks?: Prisma.SortOrder
   _count?: Prisma.UrlCountOrderByAggregateInput
   _avg?: Prisma.UrlAvgOrderByAggregateInput
   _max?: Prisma.UrlMaxOrderByAggregateInput
@@ -254,11 +269,13 @@ export type UrlScalarWhereWithAggregatesInput = {
   originalUrl?: Prisma.StringWithAggregatesFilter<"Url"> | string
   shortnedUrl?: Prisma.StringWithAggregatesFilter<"Url"> | string
   userId?: Prisma.IntWithAggregatesFilter<"Url"> | number
+  clicks?: Prisma.IntWithAggregatesFilter<"Url"> | number
 }
 
 export type UrlCreateInput = {
   originalUrl: string
   shortnedUrl: string
+  clicks?: number
   user: Prisma.UserCreateNestedOneWithoutUrlsInput
 }
 
@@ -267,11 +284,13 @@ export type UrlUncheckedCreateInput = {
   originalUrl: string
   shortnedUrl: string
   userId: number
+  clicks?: number
 }
 
 export type UrlUpdateInput = {
   originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
   shortnedUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  clicks?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.UserUpdateOneRequiredWithoutUrlsNestedInput
 }
 
@@ -280,6 +299,7 @@ export type UrlUncheckedUpdateInput = {
   originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
   shortnedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  clicks?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UrlCreateManyInput = {
@@ -287,11 +307,13 @@ export type UrlCreateManyInput = {
   originalUrl: string
   shortnedUrl: string
   userId: number
+  clicks?: number
 }
 
 export type UrlUpdateManyMutationInput = {
   originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
   shortnedUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  clicks?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UrlUncheckedUpdateManyInput = {
@@ -299,6 +321,7 @@ export type UrlUncheckedUpdateManyInput = {
   originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
   shortnedUrl?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.IntFieldUpdateOperationsInput | number
+  clicks?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UrlListRelationFilter = {
@@ -316,11 +339,13 @@ export type UrlCountOrderByAggregateInput = {
   originalUrl?: Prisma.SortOrder
   shortnedUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clicks?: Prisma.SortOrder
 }
 
 export type UrlAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clicks?: Prisma.SortOrder
 }
 
 export type UrlMaxOrderByAggregateInput = {
@@ -328,6 +353,7 @@ export type UrlMaxOrderByAggregateInput = {
   originalUrl?: Prisma.SortOrder
   shortnedUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clicks?: Prisma.SortOrder
 }
 
 export type UrlMinOrderByAggregateInput = {
@@ -335,11 +361,13 @@ export type UrlMinOrderByAggregateInput = {
   originalUrl?: Prisma.SortOrder
   shortnedUrl?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clicks?: Prisma.SortOrder
 }
 
 export type UrlSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clicks?: Prisma.SortOrder
 }
 
 export type UrlCreateNestedManyWithoutUserInput = {
@@ -387,12 +415,14 @@ export type UrlUncheckedUpdateManyWithoutUserNestedInput = {
 export type UrlCreateWithoutUserInput = {
   originalUrl: string
   shortnedUrl: string
+  clicks?: number
 }
 
 export type UrlUncheckedCreateWithoutUserInput = {
   id?: number
   originalUrl: string
   shortnedUrl: string
+  clicks?: number
 }
 
 export type UrlCreateOrConnectWithoutUserInput = {
@@ -429,29 +459,34 @@ export type UrlScalarWhereInput = {
   originalUrl?: Prisma.StringFilter<"Url"> | string
   shortnedUrl?: Prisma.StringFilter<"Url"> | string
   userId?: Prisma.IntFilter<"Url"> | number
+  clicks?: Prisma.IntFilter<"Url"> | number
 }
 
 export type UrlCreateManyUserInput = {
   id?: number
   originalUrl: string
   shortnedUrl: string
+  clicks?: number
 }
 
 export type UrlUpdateWithoutUserInput = {
   originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
   shortnedUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  clicks?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UrlUncheckedUpdateWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
   shortnedUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  clicks?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type UrlUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
   shortnedUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  clicks?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -461,6 +496,7 @@ export type UrlSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   originalUrl?: boolean
   shortnedUrl?: boolean
   userId?: boolean
+  clicks?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["url"]>
 
@@ -469,6 +505,7 @@ export type UrlSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extension
   originalUrl?: boolean
   shortnedUrl?: boolean
   userId?: boolean
+  clicks?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["url"]>
 
@@ -477,6 +514,7 @@ export type UrlSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extension
   originalUrl?: boolean
   shortnedUrl?: boolean
   userId?: boolean
+  clicks?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["url"]>
 
@@ -485,9 +523,10 @@ export type UrlSelectScalar = {
   originalUrl?: boolean
   shortnedUrl?: boolean
   userId?: boolean
+  clicks?: boolean
 }
 
-export type UrlOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "originalUrl" | "shortnedUrl" | "userId", ExtArgs["result"]["url"]>
+export type UrlOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "originalUrl" | "shortnedUrl" | "userId" | "clicks", ExtArgs["result"]["url"]>
 export type UrlInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -508,6 +547,7 @@ export type $UrlPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     originalUrl: string
     shortnedUrl: string
     userId: number
+    clicks: number
   }, ExtArgs["result"]["url"]>
   composites: {}
 }
@@ -936,6 +976,7 @@ export interface UrlFieldRefs {
   readonly originalUrl: Prisma.FieldRef<"Url", 'String'>
   readonly shortnedUrl: Prisma.FieldRef<"Url", 'String'>
   readonly userId: Prisma.FieldRef<"Url", 'Int'>
+  readonly clicks: Prisma.FieldRef<"Url", 'Int'>
 }
     
 

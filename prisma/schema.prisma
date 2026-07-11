@@ -25,4 +25,5 @@ model User {
   shortnedUrl String @unique
   userId Int
   user User @relation(fields: [userId], references: [id])
+  clicks Int @default(0)
  }
