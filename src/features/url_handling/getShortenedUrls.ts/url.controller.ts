@@ -8,6 +8,7 @@ export async function getAllUrlController(req: Request, res: Response){
     if(!user || !user.id){
         return res.status(401).json({ message: "Unauthorized" });
     }
+
     let data = null
     //check data availabe in redis or not
     data = await redisClient.get(`user:${user.id}`)
@@ -15,8 +16,8 @@ export async function getAllUrlController(req: Request, res: Response){
     //if no data exists then call db , get data and cache redis
     if(!data){
         const helperResponse: HelperResponse<URLS[]> = await GETAllShortenedURLS(user.id);
-        if(!helperResponse.data){
-            return res.status(200).json(helperResponse);
+        if(!helperResponse.success || !helperResponse.data){
+            return res.status(404).json(helperResponse);
         }
         await redisClient.set(`user:${user.id}`, JSON.stringify(helperResponse.data))
         return res.status(200).json(helperResponse);
