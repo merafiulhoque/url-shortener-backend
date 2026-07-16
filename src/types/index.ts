@@ -6,6 +6,13 @@ export interface HelperResponse<T> {
     data?: T
 }
 
+export interface LoginResponseData {
+    success: boolean
+    message: string
+    token?: string
+    user?: JWT_PAYLOAD
+}
+
 export interface JWT_PAYLOAD extends JwtPayload {
     id: number
     email: string

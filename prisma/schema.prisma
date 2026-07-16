@@ -21,7 +21,7 @@ model User {
 }
  model Url {
   id Int @id @default(autoincrement())
-  originalUrl String
+  originalUrl String @unique
   shortnedUrl String @unique
   userId Int
   user User @relation(fields: [userId], references: [id])

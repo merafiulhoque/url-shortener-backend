@@ -238,15 +238,15 @@ export type UrlOrderByWithRelationInput = {
 
 export type UrlWhereUniqueInput = Prisma.AtLeast<{
   id?: number
+  originalUrl?: string
   shortnedUrl?: string
   AND?: Prisma.UrlWhereInput | Prisma.UrlWhereInput[]
   OR?: Prisma.UrlWhereInput[]
   NOT?: Prisma.UrlWhereInput | Prisma.UrlWhereInput[]
-  originalUrl?: Prisma.StringFilter<"Url"> | string
   userId?: Prisma.IntFilter<"Url"> | number
   clicks?: Prisma.IntFilter<"Url"> | number
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-}, "id" | "shortnedUrl">
+}, "id" | "originalUrl" | "shortnedUrl">
 
 export type UrlOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

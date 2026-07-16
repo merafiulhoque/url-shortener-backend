@@ -1,6 +1,6 @@
 import { prisma } from "../../../lib/db.ts";
 import { UserSignUpData, UserSignUpSchema } from "../../../schemas/SignUpSchema.ts";
-import { HelperResponse, JWT_PAYLOAD } from "../../../types/index.ts";
+import { HelperResponse, JWT_PAYLOAD, LoginResponseData } from "../../../types/index.ts";
 import { isPasswordOk } from "../../../utils/bcrypt.ts";
 import { generateToken } from "../../../utils/jwt.ts";
 
@@ -12,7 +12,7 @@ export function loginDataValidation(data: UserSignUpData): boolean{
     return false
 }
 
-export async function login(data: UserSignUpData): Promise<HelperResponse<JWT_PAYLOAD>>{
+export async function login(data: UserSignUpData): Promise<LoginResponseData>{
     const {email, password} = data
     const user = await prisma.user.findUnique({
         where: {email},
@@ -37,11 +37,13 @@ export async function login(data: UserSignUpData): Promise<HelperResponse<JWT_PA
         }
     }
     const safeData: JWT_PAYLOAD = getSafeData(user)
+    const token = generateToken(safeData)
     
     return {
         success: true,
         message: "Login Successfull",
-        data: safeData
+        token: token,
+        user: safeData
     }
     
 }

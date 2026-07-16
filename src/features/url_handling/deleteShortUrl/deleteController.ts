@@ -20,7 +20,6 @@ export const deleteController = async (req: Request, res: Response) => {
     })
 
 
-    console.log(id, deletedUrls)
     if(deletedUrls.count === 0){
         return res.status(422).json({
             success: false,

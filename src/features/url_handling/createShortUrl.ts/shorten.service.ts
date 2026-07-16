@@ -17,6 +17,18 @@ export const createNewShortenedURL = async (userId: number, originalUrl: string)
             message: "User not found"
         };
     }
+
+    const urlExists = await prisma.url.findFirst({
+        where: {originalUrl},
+    })
+    if(!!urlExists){
+        return {
+            success: false,
+            message: "Shortened Version Already Exists, Please Check your dashboard",
+            data: urlExists
+        }
+    }
+    
     let shortenedUrl = shortURL();
     while(await doesExists(shortenedUrl)){
         shortenedUrl = shortURL();

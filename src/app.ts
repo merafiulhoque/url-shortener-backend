@@ -31,7 +31,7 @@ import { urlRouter } from "./features/url_handling/urlRouter.ts";
 app.use("/api/urls",urlRouter)
 
 app.get("/health", (req, res) => {
-    res.send("Healthy")
+    res.send(req.host)
 })
 
 app.get("/:shortenedUrl", asyncHandler(redirectionController))
