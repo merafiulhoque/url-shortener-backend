@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { JsonWebTokenError } from "jsonwebtoken";
+import { MulterError } from "multer";
 import { error } from "node:console";
 
 
@@ -12,6 +13,13 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
     }
     
     if(err instanceof Error){
+        return res.json({
+            success: false,
+            message: err.message
+        })
+    }
+
+    if(err instanceof MulterError){
         return res.json({
             success: false,
             message: err.message

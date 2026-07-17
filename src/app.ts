@@ -30,6 +30,11 @@ app.use("/api/auth/", authRouter)
 import { urlRouter } from "./features/url_handling/urlRouter.ts";
 app.use("/api/urls",urlRouter)
 
+// UPLOAD handling router
+import { uploadRouter } from "./features/uploads/router.ts";
+app.use("/api/uploads", uploadRouter)
+
+//Health Check Routes
 app.get("/health", (req, res) => {
     res.send(req.host)
 })
