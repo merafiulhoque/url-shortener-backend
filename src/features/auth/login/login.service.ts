@@ -19,7 +19,8 @@ export async function login(data: UserSignUpData): Promise<LoginResponseData>{
         select: {
             id: true,
             email: true,
-            password: true
+            password: true,
+            profilePic: true
         }
     })
 
@@ -48,7 +49,7 @@ export async function login(data: UserSignUpData): Promise<LoginResponseData>{
     
 }
 
-const getSafeData = (user: {id: number, email: string, password: string}): JWT_PAYLOAD => {
+const getSafeData = (user: {id: number, email: string, password: string, profilePic: string | null}): JWT_PAYLOAD => {
     const {password, ...safeData} = user
     return safeData
 }

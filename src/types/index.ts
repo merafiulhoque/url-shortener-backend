@@ -16,6 +16,7 @@ export interface LoginResponseData {
 export interface JWT_PAYLOAD extends JwtPayload {
     id: number
     email: string
+    profilePic: string | null
 }
 
 export interface URLS {

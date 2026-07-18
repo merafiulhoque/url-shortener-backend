@@ -38,18 +38,21 @@ export type UserMinAggregateOutputType = {
   id: number | null
   email: string | null
   password: string | null
+  profilePic: string | null
 }
 
 export type UserMaxAggregateOutputType = {
   id: number | null
   email: string | null
   password: string | null
+  profilePic: string | null
 }
 
 export type UserCountAggregateOutputType = {
   id: number
   email: number
   password: number
+  profilePic: number
   _all: number
 }
 
@@ -66,18 +69,21 @@ export type UserMinAggregateInputType = {
   id?: true
   email?: true
   password?: true
+  profilePic?: true
 }
 
 export type UserMaxAggregateInputType = {
   id?: true
   email?: true
   password?: true
+  profilePic?: true
 }
 
 export type UserCountAggregateInputType = {
   id?: true
   email?: true
   password?: true
+  profilePic?: true
   _all?: true
 }
 
@@ -171,6 +177,7 @@ export type UserGroupByOutputType = {
   id: number
   email: string
   password: string
+  profilePic: string | null
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -200,6 +207,7 @@ export type UserWhereInput = {
   id?: Prisma.IntFilter<"User"> | number
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
+  profilePic?: Prisma.StringNullableFilter<"User"> | string | null
   urls?: Prisma.UrlListRelationFilter
 }
 
@@ -207,6 +215,7 @@ export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  profilePic?: Prisma.SortOrderInput | Prisma.SortOrder
   urls?: Prisma.UrlOrderByRelationAggregateInput
 }
 
@@ -217,6 +226,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   password?: Prisma.StringFilter<"User"> | string
+  profilePic?: Prisma.StringNullableFilter<"User"> | string | null
   urls?: Prisma.UrlListRelationFilter
 }, "id" | "email">
 
@@ -224,6 +234,7 @@ export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  profilePic?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -238,11 +249,13 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"User"> | number
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
+  profilePic?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
   email: string
   password: string
+  profilePic?: string | null
   urls?: Prisma.UrlCreateNestedManyWithoutUserInput
 }
 
@@ -250,12 +263,14 @@ export type UserUncheckedCreateInput = {
   id?: number
   email: string
   password: string
+  profilePic?: string | null
   urls?: Prisma.UrlUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   urls?: Prisma.UrlUpdateManyWithoutUserNestedInput
 }
 
@@ -263,6 +278,7 @@ export type UserUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   urls?: Prisma.UrlUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -270,23 +286,27 @@ export type UserCreateManyInput = {
   id?: number
   email: string
   password: string
+  profilePic?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  profilePic?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -297,12 +317,14 @@ export type UserMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  profilePic?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
+  profilePic?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -316,6 +338,10 @@ export type UserScalarRelationFilter = {
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type IntFieldUpdateOperationsInput = {
@@ -343,12 +369,14 @@ export type UserUpdateOneRequiredWithoutUrlsNestedInput = {
 export type UserCreateWithoutUrlsInput = {
   email: string
   password: string
+  profilePic?: string | null
 }
 
 export type UserUncheckedCreateWithoutUrlsInput = {
   id?: number
   email: string
   password: string
+  profilePic?: string | null
 }
 
 export type UserCreateOrConnectWithoutUrlsInput = {
@@ -370,12 +398,14 @@ export type UserUpdateToOneWithWhereWithoutUrlsInput = {
 export type UserUpdateWithoutUrlsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateWithoutUrlsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
+  profilePic?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -413,6 +443,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   email?: boolean
   password?: boolean
+  profilePic?: boolean
   urls?: boolean | Prisma.User$urlsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -421,21 +452,24 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   email?: boolean
   password?: boolean
+  profilePic?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
   password?: boolean
+  profilePic?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
   id?: boolean
   email?: boolean
   password?: boolean
+  profilePic?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "profilePic", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   urls?: boolean | Prisma.User$urlsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -452,6 +486,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: number
     email: string
     password: string
+    profilePic: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -879,6 +914,7 @@ export interface UserFieldRefs {
   readonly id: Prisma.FieldRef<"User", 'Int'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
+  readonly profilePic: Prisma.FieldRef<"User", 'String'>
 }
     
 
