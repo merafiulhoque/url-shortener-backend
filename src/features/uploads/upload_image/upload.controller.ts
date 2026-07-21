@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { uploadOnCloudinary } from "./upload.service.ts";
 import { updateDB } from "./updateDB.ts";
+import { AppConfig } from "../../../AppConfig.ts";
 
 export async function uploadController(req:Request, res: Response ) {
     const user = req.user
@@ -17,7 +18,7 @@ export async function uploadController(req:Request, res: Response ) {
         })
     }
 
-    const result: any = await uploadOnCloudinary(req.file.buffer, "users")
+    const result: any = await uploadOnCloudinary(req.file.buffer, AppConfig.CLOUDINARY_FOLDER_FOR_USERS_PROFILES)
     if(!result || !result.success){
         return res.status(500).json({
             success: false,
