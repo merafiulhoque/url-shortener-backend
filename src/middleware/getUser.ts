@@ -10,14 +10,15 @@ export function getUser(req: Request, res: Response, next: NextFunction) {
         next()
     } else {
         const authheader = req.headers.authorization
-        if(!authheader || !authheader.startsWith("Bearer")){
-            return res.status(401).json({ success: false,  message: "Unauthorized" });
+        if(!authheader){
+            return res.status(401).json({ success: false,  message: "Invalid Authorization Header" });
         }
-        const token = authheader.split(" ")[1]
-        if (!token) {
-            return res.status(401).json({ success: false,  message: "Unauthorized" });
+        const parts = authheader.split(" ")
+
+        if (parts.length !== 2 || parts[0] !== "Bearer") {
+            return res.status(401).json({ success: false,  message: "Malformed Token" });
         }
-        const loggedInUser: JWT_PAYLOAD = decodeToken(token);
+        const loggedInUser: JWT_PAYLOAD = decodeToken(parts[1]);
         req.user = loggedInUser;
         next();
     }
