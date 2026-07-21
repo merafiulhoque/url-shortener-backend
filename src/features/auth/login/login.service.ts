@@ -1,6 +1,6 @@
 import { prisma } from "../../../lib/db.ts";
 import { UserSignUpData, UserSignUpSchema } from "../../../schemas/SignUpSchema.ts";
-import { HelperResponse, JWT_PAYLOAD, LoginResponseData } from "../../../types/index.ts";
+import { JWT_PAYLOAD, LoginResponseData } from "../../../types/index.ts";
 import { isPasswordOk } from "../../../utils/bcrypt.ts";
 import { generateToken } from "../../../utils/jwt.ts";
 

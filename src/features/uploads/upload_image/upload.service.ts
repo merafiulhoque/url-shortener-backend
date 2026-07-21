@@ -1,5 +1,5 @@
 import { Readable } from "stream"
-import cloudinary from "../../lib/cloudinary.ts"
+import cloudinary from "../../../lib/cloudinary.ts"
 
 export const uploadOnCloudinary = async (buffer: Buffer, folder = "uploads") => {
     return new Promise((resolve, reject) => {

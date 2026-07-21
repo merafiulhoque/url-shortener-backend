@@ -1,4 +1,4 @@
-import { prisma } from "../../lib/db.ts";
+import { prisma } from "../../../lib/db.ts"
 
 export async function updateDB(id: number, url: string){
     const updates = await prisma.user.updateMany({
@@ -7,7 +7,6 @@ export async function updateDB(id: number, url: string){
             profilePic: url
         }
     })
-    console.log(updates)
     if(updates.count === 0){
         return false
     }
