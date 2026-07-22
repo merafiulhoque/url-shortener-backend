@@ -17,7 +17,9 @@ model User {
   email String @unique
   password String
   profilePic String?
+  isPremium Boolean @default(false)
   urls Url[]
+  payments Payment[]
   @@map("users")
 }
  model Url {
@@ -27,4 +29,15 @@ model User {
   userId Int
   user User @relation(fields: [userId], references: [id])
   clicks Int @default(0)
- }
+}
+
+
+model Payment {
+  id Int @id @default(autoincrement())
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  paymentId String
+  orderId String
+  status Boolean
+  createdAt DateTime @default(now())
+}

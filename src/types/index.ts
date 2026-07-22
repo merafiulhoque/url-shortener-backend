@@ -17,6 +17,7 @@ export interface JWT_PAYLOAD extends JwtPayload {
     id: number
     email: string
     profilePic: string | null
+    isPremium: boolean
 }
 
 export interface URLS {
@@ -25,4 +26,10 @@ export interface URLS {
     shortnedUrl: string;
     userId: number;
     clicks: number;
+}
+
+export interface RAZORPAY_PAYMENT_OPTIONS {
+    amount: number
+    currency: "INR" | "USD"
+    receipt: string
 }

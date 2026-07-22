@@ -10,4 +10,5 @@
  */
 export type * from './models/User.ts'
 export type * from './models/Url.ts'
+export type * from './models/Payment.ts'
 export type * from './commonInputTypes.ts'

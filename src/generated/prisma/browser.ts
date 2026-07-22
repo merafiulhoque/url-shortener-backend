@@ -27,3 +27,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Url = Prisma.UrlModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel

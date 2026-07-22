@@ -34,6 +34,10 @@ app.use("/api/urls",urlRouter)
 import { uploadRouter } from "./features/uploads/router.ts";
 app.use("/api/uploads", uploadRouter)
 
+//payment handling router
+import { paymentRouter } from "./features/payment/router.ts";
+app.use("/api/payments", paymentRouter)
+
 //Health Check Routes
 app.get("/health", (req, res) => {
     res.send(req.host)
