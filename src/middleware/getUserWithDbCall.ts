@@ -5,7 +5,7 @@ export async function getUserWithDBCall(req: Request, res: Response, next: NextF
     const user = req.user
 
     if(!user){
-        return res.status(401).json({ success: false,  message: "Unauthorized HERE::" });
+        return res.status(401).json({ success: false,  message: "Unauthorized" });
     }
 
     const isUserValid = await prisma.user.findUnique({

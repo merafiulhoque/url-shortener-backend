@@ -11,7 +11,7 @@ export function getUser(req: Request, res: Response, next: NextFunction) {
     } else {
         const authheader = req.headers.authorization
         if(!authheader){
-            return res.status(401).json({ success: false,  message: "Invalid Authorization Header HERE::" });
+            return res.status(401).json({ success: false,  message: "Invalid Authorization Header" });
         }
         const parts = authheader.split(" ")
 
