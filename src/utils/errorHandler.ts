@@ -15,7 +15,7 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
     if(err instanceof Error){
         return res.json({
             success: false,
-            message: err.message
+            message: err.message + err.stack
         })
     }
 
@@ -34,7 +34,7 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
     // }
     return res.json({
             success: false,
-            message: err.message
+            message: err.message + err.stack
         })
 
 }
