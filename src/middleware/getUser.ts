@@ -24,3 +24,7 @@ export function getUser(req: Request, res: Response, next: NextFunction) {
     }
     
 }
+
+function getSafeData(data: JWT_PAYLOAD){
+
+}
