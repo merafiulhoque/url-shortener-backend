@@ -33,3 +33,11 @@ export interface RAZORPAY_PAYMENT_OPTIONS {
     currency: "INR" | "USD"
     receipt: string
 }
+
+export type EXPIRY_UNITS = "" | "minutes" | "hours" | "days" | "months" | "weeks" | "years"
+
+export interface CreateShortUrlPayload {
+    originalUrl: string
+    expiryDuration: number
+    expiryUnit: EXPIRY_UNITS
+}

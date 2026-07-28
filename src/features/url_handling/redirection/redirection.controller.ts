@@ -17,8 +17,12 @@ export async function redirectionController(req: Request, res: Response){
     }
     const urlClickUpdate = await prisma.url.update({
         where: {shortnedUrl: shortenedUrl},
-        data: {clicks: url.clicks +1},
-        select : { clicks : true }
+        data: {
+            clicks: {
+                increment: 1
+            }
+        },
+        select: {id: true}
     })
     await redisClient.del(`user:${url.userId}`)
     return res.status(302).redirect(url.originalUrl)

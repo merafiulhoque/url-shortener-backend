@@ -24,11 +24,14 @@ model User {
 }
  model Url {
   id Int @id @default(autoincrement())
-  originalUrl String @unique
+  originalUrl String
   shortnedUrl String @unique
   userId Int
   user User @relation(fields: [userId], references: [id])
   clicks Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime?
 }
 
 

@@ -1,7 +1,7 @@
 import { prisma } from "../../../lib/db.ts";
 import { HelperResponse, URLS } from "../../../types/index.ts";
 
-export const createNewShortenedURL = async (userId: number, originalUrl: string): Promise<HelperResponse<URLS>> => {
+export const createNewShortenedURL = async (userId: number, originalUrl: string, expiresAt: Date | null): Promise<HelperResponse<URLS>> => {
     const isValidUser = await prisma.user.findUnique({
         where: {
             id: userId
@@ -38,7 +38,8 @@ export const createNewShortenedURL = async (userId: number, originalUrl: string)
         data: {
             originalUrl,
             shortnedUrl: shortenedUrl,
-            userId: isValidUser.id
+            userId: isValidUser.id,
+            expiresAt: expiresAt
         }
     })
 
