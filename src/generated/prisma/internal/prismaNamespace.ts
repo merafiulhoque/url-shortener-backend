@@ -399,7 +399,8 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 export const ModelName = {
   User: 'User',
   Url: 'Url',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  UrlVisitor: 'UrlVisitor'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -415,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "url" | "payment"
+    modelProps: "user" | "url" | "payment" | "urlVisitor"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -641,6 +642,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    UrlVisitor: {
+      payload: Prisma.$UrlVisitorPayload<ExtArgs>
+      fields: Prisma.UrlVisitorFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.UrlVisitorFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlVisitorPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.UrlVisitorFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlVisitorPayload>
+        }
+        findFirst: {
+          args: Prisma.UrlVisitorFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlVisitorPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.UrlVisitorFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlVisitorPayload>
+        }
+        findMany: {
+          args: Prisma.UrlVisitorFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlVisitorPayload>[]
+        }
+        create: {
+          args: Prisma.UrlVisitorCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlVisitorPayload>
+        }
+        createMany: {
+          args: Prisma.UrlVisitorCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.UrlVisitorCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlVisitorPayload>[]
+        }
+        delete: {
+          args: Prisma.UrlVisitorDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlVisitorPayload>
+        }
+        update: {
+          args: Prisma.UrlVisitorUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlVisitorPayload>
+        }
+        deleteMany: {
+          args: Prisma.UrlVisitorDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.UrlVisitorUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.UrlVisitorUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlVisitorPayload>[]
+        }
+        upsert: {
+          args: Prisma.UrlVisitorUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$UrlVisitorPayload>
+        }
+        aggregate: {
+          args: Prisma.UrlVisitorAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateUrlVisitor>
+        }
+        groupBy: {
+          args: Prisma.UrlVisitorGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UrlVisitorGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.UrlVisitorCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.UrlVisitorCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -715,6 +790,17 @@ export const PaymentScalarFieldEnum = {
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const UrlVisitorScalarFieldEnum = {
+  id: 'id',
+  urlId: 'urlId',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  visitedAt: 'visitedAt'
+} as const
+
+export type UrlVisitorScalarFieldEnum = (typeof UrlVisitorScalarFieldEnum)[keyof typeof UrlVisitorScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -963,6 +1049,7 @@ export type GlobalOmitConfig = {
   user?: Prisma.UserOmit
   url?: Prisma.UrlOmit
   payment?: Prisma.PaymentOmit
+  urlVisitor?: Prisma.UrlVisitorOmit
 }
 
 /* Types for Logging */

@@ -249,6 +249,7 @@ export type UrlWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Url"> | Date | string
   expiresAt?: Prisma.DateTimeNullableFilter<"Url"> | Date | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  visitors?: Prisma.UrlVisitorListRelationFilter
 }
 
 export type UrlOrderByWithRelationInput = {
@@ -261,6 +262,7 @@ export type UrlOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  visitors?: Prisma.UrlVisitorOrderByRelationAggregateInput
 }
 
 export type UrlWhereUniqueInput = Prisma.AtLeast<{
@@ -276,6 +278,7 @@ export type UrlWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Url"> | Date | string
   expiresAt?: Prisma.DateTimeNullableFilter<"Url"> | Date | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  visitors?: Prisma.UrlVisitorListRelationFilter
 }, "id" | "shortnedUrl">
 
 export type UrlOrderByWithAggregationInput = {
@@ -316,6 +319,7 @@ export type UrlCreateInput = {
   updatedAt?: Date | string
   expiresAt?: Date | string | null
   user: Prisma.UserCreateNestedOneWithoutUrlsInput
+  visitors?: Prisma.UrlVisitorCreateNestedManyWithoutUrlInput
 }
 
 export type UrlUncheckedCreateInput = {
@@ -327,6 +331,7 @@ export type UrlUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   expiresAt?: Date | string | null
+  visitors?: Prisma.UrlVisitorUncheckedCreateNestedManyWithoutUrlInput
 }
 
 export type UrlUpdateInput = {
@@ -337,6 +342,7 @@ export type UrlUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   user?: Prisma.UserUpdateOneRequiredWithoutUrlsNestedInput
+  visitors?: Prisma.UrlVisitorUpdateManyWithoutUrlNestedInput
 }
 
 export type UrlUncheckedUpdateInput = {
@@ -348,6 +354,7 @@ export type UrlUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitors?: Prisma.UrlVisitorUncheckedUpdateManyWithoutUrlNestedInput
 }
 
 export type UrlCreateManyInput = {
@@ -436,6 +443,11 @@ export type UrlSumOrderByAggregateInput = {
   clicks?: Prisma.SortOrder
 }
 
+export type UrlScalarRelationFilter = {
+  is?: Prisma.UrlWhereInput
+  isNot?: Prisma.UrlWhereInput
+}
+
 export type UrlCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.UrlCreateWithoutUserInput, Prisma.UrlUncheckedCreateWithoutUserInput> | Prisma.UrlCreateWithoutUserInput[] | Prisma.UrlUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.UrlCreateOrConnectWithoutUserInput | Prisma.UrlCreateOrConnectWithoutUserInput[]
@@ -486,6 +498,20 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
+export type UrlCreateNestedOneWithoutVisitorsInput = {
+  create?: Prisma.XOR<Prisma.UrlCreateWithoutVisitorsInput, Prisma.UrlUncheckedCreateWithoutVisitorsInput>
+  connectOrCreate?: Prisma.UrlCreateOrConnectWithoutVisitorsInput
+  connect?: Prisma.UrlWhereUniqueInput
+}
+
+export type UrlUpdateOneRequiredWithoutVisitorsNestedInput = {
+  create?: Prisma.XOR<Prisma.UrlCreateWithoutVisitorsInput, Prisma.UrlUncheckedCreateWithoutVisitorsInput>
+  connectOrCreate?: Prisma.UrlCreateOrConnectWithoutVisitorsInput
+  upsert?: Prisma.UrlUpsertWithoutVisitorsInput
+  connect?: Prisma.UrlWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UrlUpdateToOneWithWhereWithoutVisitorsInput, Prisma.UrlUpdateWithoutVisitorsInput>, Prisma.UrlUncheckedUpdateWithoutVisitorsInput>
+}
+
 export type UrlCreateWithoutUserInput = {
   originalUrl: string
   shortnedUrl: string
@@ -493,6 +519,7 @@ export type UrlCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   expiresAt?: Date | string | null
+  visitors?: Prisma.UrlVisitorCreateNestedManyWithoutUrlInput
 }
 
 export type UrlUncheckedCreateWithoutUserInput = {
@@ -503,6 +530,7 @@ export type UrlUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   expiresAt?: Date | string | null
+  visitors?: Prisma.UrlVisitorUncheckedCreateNestedManyWithoutUrlInput
 }
 
 export type UrlCreateOrConnectWithoutUserInput = {
@@ -545,6 +573,64 @@ export type UrlScalarWhereInput = {
   expiresAt?: Prisma.DateTimeNullableFilter<"Url"> | Date | string | null
 }
 
+export type UrlCreateWithoutVisitorsInput = {
+  originalUrl: string
+  shortnedUrl: string
+  clicks?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  expiresAt?: Date | string | null
+  user: Prisma.UserCreateNestedOneWithoutUrlsInput
+}
+
+export type UrlUncheckedCreateWithoutVisitorsInput = {
+  id?: number
+  originalUrl: string
+  shortnedUrl: string
+  userId: number
+  clicks?: number
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  expiresAt?: Date | string | null
+}
+
+export type UrlCreateOrConnectWithoutVisitorsInput = {
+  where: Prisma.UrlWhereUniqueInput
+  create: Prisma.XOR<Prisma.UrlCreateWithoutVisitorsInput, Prisma.UrlUncheckedCreateWithoutVisitorsInput>
+}
+
+export type UrlUpsertWithoutVisitorsInput = {
+  update: Prisma.XOR<Prisma.UrlUpdateWithoutVisitorsInput, Prisma.UrlUncheckedUpdateWithoutVisitorsInput>
+  create: Prisma.XOR<Prisma.UrlCreateWithoutVisitorsInput, Prisma.UrlUncheckedCreateWithoutVisitorsInput>
+  where?: Prisma.UrlWhereInput
+}
+
+export type UrlUpdateToOneWithWhereWithoutVisitorsInput = {
+  where?: Prisma.UrlWhereInput
+  data: Prisma.XOR<Prisma.UrlUpdateWithoutVisitorsInput, Prisma.UrlUncheckedUpdateWithoutVisitorsInput>
+}
+
+export type UrlUpdateWithoutVisitorsInput = {
+  originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  shortnedUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  clicks?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  user?: Prisma.UserUpdateOneRequiredWithoutUrlsNestedInput
+}
+
+export type UrlUncheckedUpdateWithoutVisitorsInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  originalUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  shortnedUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.IntFieldUpdateOperationsInput | number
+  clicks?: Prisma.IntFieldUpdateOperationsInput | number
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+}
+
 export type UrlCreateManyUserInput = {
   id?: number
   originalUrl: string
@@ -562,6 +648,7 @@ export type UrlUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitors?: Prisma.UrlVisitorUpdateManyWithoutUrlNestedInput
 }
 
 export type UrlUncheckedUpdateWithoutUserInput = {
@@ -572,6 +659,7 @@ export type UrlUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   expiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  visitors?: Prisma.UrlVisitorUncheckedUpdateManyWithoutUrlNestedInput
 }
 
 export type UrlUncheckedUpdateManyWithoutUserInput = {
@@ -585,6 +673,35 @@ export type UrlUncheckedUpdateManyWithoutUserInput = {
 }
 
 
+/**
+ * Count Type UrlCountOutputType
+ */
+
+export type UrlCountOutputType = {
+  visitors: number
+}
+
+export type UrlCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  visitors?: boolean | UrlCountOutputTypeCountVisitorsArgs
+}
+
+/**
+ * UrlCountOutputType without action
+ */
+export type UrlCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UrlCountOutputType
+   */
+  select?: Prisma.UrlCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UrlCountOutputType without action
+ */
+export type UrlCountOutputTypeCountVisitorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UrlVisitorWhereInput
+}
+
 
 export type UrlSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -596,6 +713,8 @@ export type UrlSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   updatedAt?: boolean
   expiresAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visitors?: boolean | Prisma.Url$visitorsArgs<ExtArgs>
+  _count?: boolean | Prisma.UrlCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["url"]>
 
 export type UrlSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -636,6 +755,8 @@ export type UrlSelectScalar = {
 export type UrlOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "originalUrl" | "shortnedUrl" | "userId" | "clicks" | "createdAt" | "updatedAt" | "expiresAt", ExtArgs["result"]["url"]>
 export type UrlInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  visitors?: boolean | Prisma.Url$visitorsArgs<ExtArgs>
+  _count?: boolean | Prisma.UrlCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UrlIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -648,6 +769,7 @@ export type $UrlPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   name: "Url"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    visitors: Prisma.$UrlVisitorPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1053,6 +1175,7 @@ readonly fields: UrlFieldRefs;
 export interface Prisma__UrlClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  visitors<T extends Prisma.Url$visitorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Url$visitorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UrlVisitorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1488,6 +1611,30 @@ export type UrlDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Limit how many Urls to delete.
    */
   limit?: number
+}
+
+/**
+ * Url.visitors
+ */
+export type Url$visitorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UrlVisitor
+   */
+  select?: Prisma.UrlVisitorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UrlVisitor
+   */
+  omit?: Prisma.UrlVisitorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UrlVisitorInclude<ExtArgs> | null
+  where?: Prisma.UrlVisitorWhereInput
+  orderBy?: Prisma.UrlVisitorOrderByWithRelationInput | Prisma.UrlVisitorOrderByWithRelationInput[]
+  cursor?: Prisma.UrlVisitorWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UrlVisitorScalarFieldEnum | Prisma.UrlVisitorScalarFieldEnum[]
 }
 
 /**

@@ -53,7 +53,8 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   Url: 'Url',
-  Payment: 'Payment'
+  Payment: 'Payment',
+  UrlVisitor: 'UrlVisitor'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -107,6 +108,17 @@ export const PaymentScalarFieldEnum = {
 } as const
 
 export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const UrlVisitorScalarFieldEnum = {
+  id: 'id',
+  urlId: 'urlId',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  visitedAt: 'visitedAt'
+} as const
+
+export type UrlVisitorScalarFieldEnum = (typeof UrlVisitorScalarFieldEnum)[keyof typeof UrlVisitorScalarFieldEnum]
 
 
 export const SortOrder = {

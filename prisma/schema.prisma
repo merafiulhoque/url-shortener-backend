@@ -32,6 +32,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   expiresAt DateTime?
+  visitors UrlVisitor[]
 }
 
 
@@ -43,4 +44,13 @@ model Payment {
   orderId String
   status Boolean
   createdAt DateTime @default(now())
+}
+
+model UrlVisitor {
+  id Int @id @default(autoincrement())
+  urlId Int
+  url Url @relation(fields: [urlId], references: [id])
+  ipAddress String?
+  userAgent String?
+  visitedAt DateTime @default(now())
 }

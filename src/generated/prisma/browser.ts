@@ -32,3 +32,8 @@ export type Url = Prisma.UrlModel
  * 
  */
 export type Payment = Prisma.PaymentModel
+/**
+ * Model UrlVisitor
+ * 
+ */
+export type UrlVisitor = Prisma.UrlVisitorModel
