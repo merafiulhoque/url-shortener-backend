@@ -20,13 +20,7 @@ export interface JWT_PAYLOAD extends JwtPayload {
     isPremium: boolean
 }
 
-export interface URLS {
-    id: number;
-    originalUrl: string;
-    shortnedUrl: string;
-    userId: number;
-    clicks: number;
-}
+
 
 export interface RAZORPAY_PAYMENT_OPTIONS {
     amount: number
@@ -40,4 +34,15 @@ export interface CreateShortUrlPayload {
     originalUrl: string
     expiryDuration: number
     expiryUnit: EXPIRY_UNITS
+}
+
+export interface URLS {
+    id: number;
+    originalUrl: string;
+    shortnedUrl: string;
+    userId: number;
+    clicks: number;
+    createdAt: Date;
+    updatedAt: Date;
+    expiresAt: Date | null;
 }

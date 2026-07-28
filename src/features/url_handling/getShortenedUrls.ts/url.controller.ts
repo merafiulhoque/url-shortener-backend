@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import {  GETAllShortenedURLS } from "./url.service.ts";
-import { HelperResponse, URLS } from "../../../types/index.ts";
+import { URLS, HelperResponse } from "../../../types/index.ts";
 import { redisClient } from "../../../lib/redis.ts";
 
 export async function getAllUrlController(req: Request, res: Response){
