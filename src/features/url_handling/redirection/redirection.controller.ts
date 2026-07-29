@@ -30,10 +30,20 @@ export async function redirectionController(req: Request, res: Response){
         select: {id: true}
     })
     // Update visitor
+
+    let ipString = ""
+    const forwardedHeader = req.headers["x-forwarded-for"]
+    
+    if (!!forwardedHeader){
+        ipString = Array.isArray(forwardedHeader) ? forwardedHeader[0] : forwardedHeader
+    }
+    if (!forwardedHeader){
+        ipString = req.ip ?? "Unknown IP"
+    }
     const newVisitor = await prisma.urlVisitor.create({
         data: {
             urlId: url.id,
-            ipAddress: req.ip,
+            ipAddress: ipString,
             userAgent: req.get("user-agent"),
         }
     })

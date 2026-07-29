@@ -46,3 +46,20 @@ export interface URLS {
     updatedAt: Date;
     expiresAt: Date | null;
 }
+
+export interface Visitor {
+    id: number;
+    urlId: number;
+    ipAddress?: string
+    userAgent?: string
+    visitedAt?: Date;
+}
+
+export interface UrlStatData {
+    shortnedUrl: string;
+    originalUrl: string;
+    createdAt: Date;
+    expiresAt?: Date
+    visitors?: Visitor[]
+}
+
