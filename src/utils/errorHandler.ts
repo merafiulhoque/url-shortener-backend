@@ -1,3 +1,4 @@
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import { Request, Response, NextFunction } from "express";
 import { JsonWebTokenError } from "jsonwebtoken";
 import { MulterError } from "multer";
@@ -15,7 +16,7 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
     if(err instanceof Error){
         return res.json({
             success: false,
-            message: err.message + err.stack
+            message: err.message
         })
     }
 
@@ -23,6 +24,13 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
         return res.json({
             success: false,
             message: err.message
+        })
+    }
+
+    if(err instanceof PrismaClientKnownRequestError){
+        return res.json({
+            success: false,
+            message: "DB Error"
         })
     }
 
@@ -34,7 +42,7 @@ export const errorHandler = (err: any, req: Request, res: Response, next: NextFu
     // }
     return res.json({
             success: false,
-            message: err.message + err.stack
+            message: err.message
         })
 
 }

@@ -43,12 +43,21 @@ app.get("/health", (req, res) => {
     res.send(req.host)
 })
 
+// main feature body:: redirection service
+import { redirectionController } from "./features/url_handling/redirection/redirection.controller.ts";
+import { verifyRoutePassword } from "./features/url_handling/redirection/verifyRoutePassword.ts";
+import { redirectWithALias } from "./features/url_handling/redirection/redirectWithAlias.ts";
+import { verifyRoutePasswordWithAlias } from "./features/url_handling/redirection/verifyRoutePasswordWithAlias.ts";
+import { asyncHandler } from "./utils/asyncHandler.ts";
+
+
 app.get("/:shortenedUrl", asyncHandler(redirectionController))
+app.get("/:alias/:shortenedUrl", asyncHandler(redirectWithALias))
+app.post("/:shortenedUrl/verify", asyncHandler(verifyRoutePassword))
+app.post("/:alias/:shortenedUrl/verify", asyncHandler(verifyRoutePasswordWithAlias))
 
 //global error handler
 import { errorHandler } from "./utils/errorHandler.ts";
-import { redirectionController } from "./features/url_handling/redirection/redirection.controller.ts";
-import { asyncHandler } from "./utils/asyncHandler.ts";
 app.use(errorHandler)
 
 

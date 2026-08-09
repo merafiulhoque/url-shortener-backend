@@ -35,6 +35,7 @@ export interface CreateShortUrlPayload {
     expiryDuration: number
     expiryUnit: EXPIRY_UNITS
     customAlias: string
+    password: string
 }
 
 export interface URLS {
@@ -63,4 +64,3 @@ export interface UrlStatData {
     expiresAt?: Date
     visitors?: Visitor[]
 }
-

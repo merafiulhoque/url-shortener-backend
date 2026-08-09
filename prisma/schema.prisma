@@ -27,6 +27,7 @@ model User {
   id Int @id @default(autoincrement())
   originalUrl String
   shortnedUrl String @unique
+  password String?
   userId Int
   user User @relation(fields: [userId], references: [id])
   clicks Int @default(0)

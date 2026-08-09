@@ -17,7 +17,7 @@ export async function createNewUrlController(req: Request, res: Response) {
         return res.status(400).json({ message: "Original URL is required" });
     }
 
-    const helperResponse: HelperResponse<URLS> = await createNewShortenedURL(user.id, payload.originalUrl, payload.customAlias ,expiresAt);
+    const helperResponse: HelperResponse<URLS> = await createNewShortenedURL(user.id, payload ,expiresAt);
 
     if (!helperResponse.success || !helperResponse.data) {
         return res.status(400).json(helperResponse);

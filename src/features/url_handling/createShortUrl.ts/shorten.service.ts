@@ -1,7 +1,8 @@
 import { prisma } from "../../../lib/db.ts";
-import { HelperResponse, URLS } from "../../../types/index.ts";
+import { CreateShortUrlPayload, HelperResponse, URLS } from "../../../types/index.ts";
+import { hashPassword } from "../../../utils/bcrypt.ts";
 
-export const createNewShortenedURL = async (userId: number, originalUrl: string, customAlias: string, expiresAt: Date | null): Promise<HelperResponse<URLS>> => {
+export const createNewShortenedURL = async (userId: number, payload: CreateShortUrlPayload,  expiresAt: Date | null): Promise<HelperResponse<URLS>> => {
     const isValidUser = await prisma.user.findUnique({
         where: {
             id: userId
@@ -28,7 +29,7 @@ export const createNewShortenedURL = async (userId: number, originalUrl: string,
 
     const urlExists = await prisma.url.findFirst({
         where: {
-            originalUrl: originalUrl,
+            originalUrl: payload.originalUrl,
             userId: userId
         },
     })
@@ -40,17 +41,34 @@ export const createNewShortenedURL = async (userId: number, originalUrl: string,
         }
     }
     
-    let shortenedUrl = customAlias === "" ? shortURL() : `${customAlias}/${shortURL()}`;
+    let shortenedUrl = payload.customAlias === "" ? shortURL() : `${payload.customAlias}/${shortURL()}`;
     while(await doesExists(shortenedUrl)){
         shortenedUrl = shortURL();
     }
 
+    let hash: string  = ""
+
+    if (!!payload.password && payload.password !== ""){
+        hash = await hashPassword(payload.password)
+    }
+
     const newUrl = await prisma.url.create({
         data: {
-            originalUrl,
+            originalUrl: payload.originalUrl,
             shortnedUrl: shortenedUrl,
             userId: isValidUser.id,
-            expiresAt: expiresAt
+            expiresAt: expiresAt,
+            password: hash === "" ? null : hash
+        },
+        select: {
+            originalUrl: true,
+            shortnedUrl: true,
+            id: true,
+            userId: true,
+            createdAt: true,
+            updatedAt: true,
+            expiresAt: true,
+            clicks: true
         }
     })
 
