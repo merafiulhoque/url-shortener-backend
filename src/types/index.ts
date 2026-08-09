@@ -34,6 +34,7 @@ export interface CreateShortUrlPayload {
     originalUrl: string
     expiryDuration: number
     expiryUnit: EXPIRY_UNITS
+    customAlias: string
 }
 
 export interface URLS {

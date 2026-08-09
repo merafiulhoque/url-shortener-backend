@@ -1,13 +1,14 @@
 import { prisma } from "../../../lib/db.ts";
 import { HelperResponse, URLS } from "../../../types/index.ts";
 
-export const createNewShortenedURL = async (userId: number, originalUrl: string, expiresAt: Date | null): Promise<HelperResponse<URLS>> => {
+export const createNewShortenedURL = async (userId: number, originalUrl: string, customAlias: string, expiresAt: Date | null): Promise<HelperResponse<URLS>> => {
     const isValidUser = await prisma.user.findUnique({
         where: {
             id: userId
         },
         select: {
-            id: true
+            id: true,
+            isPremium: true
         }
     })
 
@@ -18,18 +19,28 @@ export const createNewShortenedURL = async (userId: number, originalUrl: string,
         };
     }
 
+    if(!isValidUser.isPremium){
+        return {
+            success: false,
+            message: "To use custom alias, Please upgrade to premium"
+        }
+    }
+
     const urlExists = await prisma.url.findFirst({
-        where: {originalUrl},
+        where: {
+            originalUrl: originalUrl,
+            userId: userId
+        },
     })
+
     if(!!urlExists){
         return {
             success: false,
             message: "Shortened Version Already Exists, Please Check your dashboard",
-            data: urlExists
         }
     }
     
-    let shortenedUrl = shortURL();
+    let shortenedUrl = customAlias === "" ? shortURL() : `${customAlias}/${shortURL()}`;
     while(await doesExists(shortenedUrl)){
         shortenedUrl = shortURL();
     }
@@ -68,21 +79,4 @@ const doesExists = async (shortUrl: string): Promise<boolean> => {
         select: {id: true}
     });
     return !!url;
-}
-
-const redirectToOriginalUrl = async (shortenedUrl: string): Promise<HelperResponse<null>> => {
-    const url = await prisma.url.findUnique({
-        where: {shortnedUrl: shortenedUrl},
-        select: {originalUrl: true}
-    })
-    if(!url || !url.originalUrl){
-        return {
-            success: false,
-            message: "Route does not exists"
-        }
-    }
-    return {
-        success: true,
-        message: "Redirected successfully"
-    }
 }
