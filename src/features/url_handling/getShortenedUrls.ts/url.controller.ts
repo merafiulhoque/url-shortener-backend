@@ -3,6 +3,7 @@ import {  GETAllShortenedURLS } from "./url.service.ts";
 import { URLS, HelperResponse, JWT_PAYLOAD } from "../../../types/index.ts";
 import { getRedisCacheVersion, redisClient } from "../../../lib/redis.ts";
 import { version } from "node:os";
+import { prisma } from "../../../lib/db.ts";
 
 export async function getAllUrlController(req: Request, res: Response){
     const user : JWT_PAYLOAD = req.user;
@@ -11,12 +12,25 @@ export async function getAllUrlController(req: Request, res: Response){
     }
 
 
-    const {page} = req.query
+    const { page } = req.query
 
-    if(!page || typeof page === "object"){
+    if(typeof page === "object"){
         return res.status(400).json({
             success: false,
             message: "Invalid request"
+        })
+    }
+
+    if(!page){
+        const urls = await prisma.url.findMany({
+            where: {
+                userId: user.id
+            },
+        })
+        return res.status(200).json({
+            success: true,
+            message: "Fetched successfully",
+            data: urls
         })
     }
 
