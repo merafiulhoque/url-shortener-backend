@@ -30,12 +30,29 @@ export interface RAZORPAY_PAYMENT_OPTIONS {
 
 export type EXPIRY_UNITS = "" | "minutes" | "hours" | "days" | "months" | "weeks" | "years"
 
-export interface CreateShortUrlPayload {
+export type CreateShortUrlPayload =
+  | {
+      originalUrl: string;
+      customAlias: string;
+      password: string;
+      expiryDuration: number;
+      expiryUnit: EXPIRY_UNITS;
+      expiryDate?: never;
+    }
+  | {
+      originalUrl: string;
+      customAlias: string;
+      password: string;
+      expiryDate: Date;
+      expiryDuration?: never;
+      expiryUnit?: never;
+    };
+
+export type CreateUrl = {
     originalUrl: string
-    expiryDuration: number
-    expiryUnit: EXPIRY_UNITS
     customAlias: string
     password: string
+    expiresAt: Date | null
 }
 
 export interface URLS {

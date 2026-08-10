@@ -11,3 +11,13 @@ redisClient.on("error", (error) => {
 })
 
 await redisClient.connect()
+
+
+export async function getRedisCacheVersion(userId: string){
+    const version = await redisClient.get(`user:${userId}:urlCacheVersion`)
+    return version
+}
+
+export async function incrementCacheVersion(userId: string){
+    await redisClient.incr(`user:${userId}:urlCacheVersion`)
+}

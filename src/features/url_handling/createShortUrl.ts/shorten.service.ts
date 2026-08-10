@@ -1,8 +1,8 @@
 import { prisma } from "../../../lib/db.ts";
-import { CreateShortUrlPayload, HelperResponse, URLS } from "../../../types/index.ts";
+import { CreateShortUrlPayload, CreateUrl, HelperResponse, URLS } from "../../../types/index.ts";
 import { hashPassword } from "../../../utils/bcrypt.ts";
 
-export const createNewShortenedURL = async (userId: number, payload: CreateShortUrlPayload,  expiresAt: Date | null): Promise<HelperResponse<URLS>> => {
+export const createNewShortenedURL = async (userId: number, payload: CreateUrl,  expiresAt: Date | null): Promise<HelperResponse<URLS>> => {
     const isValidUser = await prisma.user.findUnique({
         where: {
             id: userId

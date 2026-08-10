@@ -28,12 +28,12 @@ export type User = Prisma.UserModel
  */
 export type Url = Prisma.UrlModel
 /**
- * Model Payment
- * 
- */
-export type Payment = Prisma.PaymentModel
-/**
  * Model UrlVisitor
  * 
  */
 export type UrlVisitor = Prisma.UrlVisitorModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel

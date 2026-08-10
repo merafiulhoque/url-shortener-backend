@@ -37,6 +37,15 @@ model User {
   visitors UrlVisitor[]
 }
 
+model UrlVisitor {
+  id Int @id @default(autoincrement())
+  urlId Int
+  url Url @relation(fields: [urlId], references: [id], onDelete: Cascade)
+  ipAddress String?
+  userAgent String?
+  visitedAt DateTime @default(now())
+}
+
 
 model Payment {
   id Int @id @default(autoincrement())
@@ -48,11 +57,3 @@ model Payment {
   createdAt DateTime @default(now())
 }
 
-model UrlVisitor {
-  id Int @id @default(autoincrement())
-  urlId Int
-  url Url @relation(fields: [urlId], references: [id])
-  ipAddress String?
-  userAgent String?
-  visitedAt DateTime @default(now())
-}

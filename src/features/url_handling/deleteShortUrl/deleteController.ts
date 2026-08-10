@@ -1,10 +1,11 @@
 import { Request, Response } from "express"
 import { prisma } from "../../../lib/db.ts"
-import { redisClient } from "../../../lib/redis.ts"
+import { incrementCacheVersion, redisClient } from "../../../lib/redis.ts"
+import { JWT_PAYLOAD } from "../../../types/index.ts"
 
 export const deleteController = async (req: Request, res: Response) => {
-    const {id} = req.body
-    const user = req.user
+    const { id } = req.body
+    const user: JWT_PAYLOAD = req.user
 
     if (!user){
         return res.status(401).json({
@@ -13,7 +14,7 @@ export const deleteController = async (req: Request, res: Response) => {
         })
     }
 
-    await redisClient.del(`user:${user.id}`)
+    await incrementCacheVersion(String(user.id))
 
     const deletedUrls = await prisma.url.deleteMany({
         where: {id}
