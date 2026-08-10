@@ -1,17 +1,17 @@
 # ⚙️ URL Shortener --- Backend API
 
-A production-oriented REST API powering a full-stack URL management
-platform. The backend handles authentication, authorization, URL
-management, premium feature gating, analytics, visitor tracking,
-validation, rate limiting, and PostgreSQL persistence.
+A production-oriented REST API for a full-stack URL management platform.
+The backend handles authentication, authorization, URL management,
+Premium feature gating, analytics, visitor tracking, validation, rate
+limiting, and PostgreSQL persistence.
 
 ## ✨ Features
 
 ### URL Management
 
 -   Create shortened URLs
--   Generate unique short codes
--   Redirect short URLs to original destinations
+-   Unique short-code generation
+-   Short URL redirects
 -   Custom aliases for Premium users
 -   Custom-alias availability checking
 -   Search
@@ -32,7 +32,7 @@ validation, rate limiting, and PostgreSQL persistence.
 -   Referrer tracking
 -   Device/browser information
 -   Visitor logs
--   Analytics data for dashboard visualization
+-   Per-link analytics
 
 ### Authentication & Authorization
 
@@ -42,31 +42,18 @@ validation, rate limiting, and PostgreSQL persistence.
 -   User-specific resource access
 -   Authorization checks
 -   Forgot-password functionality
--   Logout/session handling
+-   Logout
 -   Premium account support
 -   Premium feature authorization
 
 ### Validation & Reliability
 
 -   Server-side validation
--   Global error handler
+-   Global error handling
 -   Global async error handling
 -   Graceful API error responses
 -   Endpoint-specific rate limiting
--   Duplicate-submission/request protection where appropriate
 -   Expired-link handling
-
-### Security
-
--   JWT-based authentication
--   Authorization checks
--   Prisma ORM
--   Parameterized database operations
--   Environment-based secrets
--   Production HTTPS
--   Endpoint-specific rate limiting
-
-------------------------------------------------------------------------
 
 ## 🧰 Tech Stack
 
@@ -78,14 +65,7 @@ validation, rate limiting, and PostgreSQL persistence.
 -   JWT
 -   REST API
 
-> Add or remove exact dependencies according to the packages actually
-> present in this repository.
-
-------------------------------------------------------------------------
-
 ## 🏗️ Architecture
-
-The backend is a REST API consumed by the separately deployed frontend.
 
 ``` text
 ┌──────────────────────────┐
@@ -100,12 +80,12 @@ The backend is a REST API consumed by the separately deployed frontend.
 │      Deployed on Render  │
 │                          │
 │ Authentication           │
-│ Authorization             │
-│ URL Management            │
-│ Analytics                 │
-│ Validation                │
-│ Rate Limiting             │
-│ Error Handling            │
+│ Authorization            │
+│ URL Management           │
+│ Analytics                │
+│ Validation               │
+│ Rate Limiting            │
+│ Error Handling           │
 └────────────┬─────────────┘
              │
              │ Prisma
@@ -114,47 +94,6 @@ The backend is a REST API consumed by the separately deployed frontend.
 │     PostgreSQL / Neon    │
 └──────────────────────────┘
 ```
-
-------------------------------------------------------------------------
-
-## 🔗 URL Shortening Flow
-
-``` text
-Client submits long URL
-          │
-          ▼
-Server-side validation
-          │
-          ▼
-Authentication / authorization
-          │
-          ▼
-Premium feature checks
-          │
-          ├── Custom alias
-          ├── Expiration
-          └── Password protection
-          │
-          ▼
-Prisma database operation
-          │
-          ▼
-Short URL returned to client
-          │
-          ▼
-Short URL request
-          │
-          ▼
-Lookup + validation
-          │
-          ▼
-Analytics recorded
-          │
-          ▼
-Redirect to destination
-```
-
-------------------------------------------------------------------------
 
 ## 🔐 Authentication & Authorization
 
@@ -166,64 +105,48 @@ allowing access to protected resources.
 Authorization checks ensure users cannot access or modify resources
 belonging to other users.
 
-Premium-only functionality is also enforced on the backend rather than
-relying solely on frontend visibility.
-
-------------------------------------------------------------------------
+Premium-only functionality is enforced on the backend rather than
+relying only on frontend restrictions.
 
 ## 🛡️ Security
 
 ### Server-Side Validation
 
-User input is validated on the backend before database operations or
-business logic are executed.
+User input is validated on the backend before processing or database
+operations.
 
 ### SQL Injection Protection
 
-Database operations use Prisma's standard query APIs and parameterized
-operations for normal CRUD/database interactions.
+Database access uses Prisma's standard query APIs and parameterized
+database operations for normal CRUD operations.
 
 ### Rate Limiting
 
-Rate limits are configured independently for different API endpoints
-according to their expected usage and risk profile.
+Different API endpoints use different rate limits according to their
+expected usage and risk profile.
 
 ### Environment Variables
 
-Sensitive configuration is kept outside the source code.
-
-Example:
-
-``` env
-DATABASE_URL="YOUR_DATABASE_URL"
-JWT_SECRET="YOUR_JWT_SECRET"
-```
-
-Never commit real credentials or `.env` files containing secrets.
-
-------------------------------------------------------------------------
+Sensitive configuration such as database credentials and JWT secrets is
+stored in environment variables rather than source code.
 
 ## 🗄️ Database
 
-The backend uses **PostgreSQL hosted on Neon** and accesses the database
+The application uses **PostgreSQL hosted on Neon** and accesses it
 through **Prisma ORM**.
 
 Prisma provides:
 
 -   Schema management
--   Type-safe database access
 -   Database migrations
--   Parameterized query operations
+-   Type-safe database access
+-   Parameterized database operations
 -   Relationship handling
--   Consistent CRUD operations
-
-The production application uses the configured Neon PostgreSQL database.
-
-------------------------------------------------------------------------
+-   CRUD operations
 
 ## 📊 Analytics
 
-The backend records data required by the frontend analytics system,
+The backend records the data required by the analytics system,
 including:
 
 -   Total clicks
@@ -234,28 +157,21 @@ including:
 -   Device/browser information
 -   Per-link analytics
 
-This data powers both the analytics overview and detailed visitor-log
-views.
-
-------------------------------------------------------------------------
+This data powers the analytics overview and detailed visitor logs.
 
 ## ⭐ Premium Feature Gating
 
 Premium functionality is enforced at the backend level.
 
-For example, custom aliases are available to Premium users and their
-availability is checked before creating a link.
-
-This prevents users from bypassing frontend restrictions by calling the
-API directly.
-
-------------------------------------------------------------------------
+Custom aliases, for example, are available only to Premium users. The
+backend verifies account privileges before allowing Premium operations.
 
 ## ⚠️ Error Handling
 
-The backend uses centralized error handling and async error handling.
+Centralized error handling and async error handling provide consistent
+API responses.
 
-Examples of handled conditions include:
+Handled conditions include:
 
 -   Invalid input
 -   Invalid URLs
@@ -268,23 +184,16 @@ Examples of handled conditions include:
 -   Database failures
 -   Unexpected server errors
 
-The API returns structured error responses that the frontend displays
-through its custom notification system.
-
-------------------------------------------------------------------------
-
 ## 📄 API Areas
 
-The API is organized around the application's core domains.
-
-Typical areas include:
+The API covers the application's main domains:
 
 ``` text
 Authentication
 ├── Register
 ├── Login
 ├── Forgot password
-└── Protected user/session operations
+└── Protected user operations
 
 URLs
 ├── Create
@@ -308,66 +217,49 @@ Premium
 └── Feature authorization
 ```
 
-Update this section with the exact route names/endpoints used in the
-repository if you want a complete API reference.
-
-------------------------------------------------------------------------
-
 ## 🚀 Local Development
 
-### 1. Clone the repository
-
-``` bash
-git clone YOUR_BACKEND_REPOSITORY_URL
-cd YOUR_BACKEND_DIRECTORY
-```
-
-### 2. Install dependencies
+### Install dependencies
 
 ``` bash
 npm install
 ```
 
-### 3. Configure environment variables
+### Configure environment variables
 
-Create the required `.env` file.
+Create the required `.env` file with your database connection and JWT
+configuration.
 
 Example:
 
 ``` env
-DATABASE_URL="YOUR_NEON_DATABASE_URL"
-JWT_SECRET="YOUR_JWT_SECRET"
+DATABASE_URL="your-database-url"
+JWT_SECRET="your-jwt-secret"
 ```
 
-Add any other variables required by the application.
+Never commit real secrets to source control.
 
-### 4. Generate Prisma Client
+### Generate Prisma Client
 
 ``` bash
 npx prisma generate
 ```
 
-### 5. Run database migrations
+### Run migrations
 
 ``` bash
 npx prisma migrate dev
 ```
 
-### 6. Start the development server
+### Start the server
 
 ``` bash
 npm run dev
 ```
 
-Use the scripts defined in `package.json` if the repository uses
-different commands.
-
-------------------------------------------------------------------------
-
 ## 🌐 Deployment
 
-The backend is deployed on **Render** and uses **Neon PostgreSQL** for
-production data.
+The backend is deployed on **Render** and uses **Neon PostgreSQL**.
 
 ``` text
 Frontend
@@ -381,68 +273,25 @@ Render Backend
 Neon PostgreSQL
 ```
 
-The backend is configured to support environment-specific URLs so
-development and production can use the same database model while
-generating the appropriate public backend URL for each environment.
+Production communication uses HTTPS.
 
-------------------------------------------------------------------------
+The application uses environment-specific configuration so development
+and production can generate the appropriate backend URL while using the
+same database structure.
 
-## 🧪 Testing & Verification
+## 📈 Production Practices
 
-Important flows to verify during development include:
-
--   Registration
--   Login
--   JWT-protected requests
--   Unauthorized access
--   URL creation
--   Duplicate URL handling
--   Custom alias validation
--   Premium authorization
--   URL expiration
--   Password-protected links
--   Redirect behavior
--   Click tracking
--   Analytics
--   Pagination
--   Search
--   Update/delete operations
--   Rate limits
--   Database failures
--   Global error handling
-
-------------------------------------------------------------------------
-
-## 📈 Production Considerations
-
-The backend includes several production-oriented practices:
-
--   HTTPS in production
--   Environment variables for secrets
--   Centralized error handling
--   Server-side validation
 -   JWT authentication
 -   Authorization checks
+-   Server-side validation
 -   Endpoint-specific rate limiting
+-   Centralized error handling
+-   Environment variables for secrets
 -   Prisma ORM
--   Production PostgreSQL
--   Pagination for scalable URL listings
-
-------------------------------------------------------------------------
-
-## 🔮 Future Improvements
-
-Potential future enhancements include:
-
--   Geographic analytics
--   Link preview metadata
--   Custom domain support
--   Additional analytics dimensions
--   Further abuse-prevention mechanisms
-
-------------------------------------------------------------------------
+-   PostgreSQL
+-   Pagination
+-   HTTPS in production
 
 ## 📄 License
 
-Add the project's preferred license here if the repository is intended
-for public distribution.
+This project is a portfolio project.
