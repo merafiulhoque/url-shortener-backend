@@ -26,6 +26,10 @@ export async function getAllUrlController(req: Request, res: Response){
             where: {
                 userId: user.id
             },
+            orderBy: {
+                clicks: "desc"
+            },
+            take: 20
         })
         return res.status(200).json({
             success: true,
