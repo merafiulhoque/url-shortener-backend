@@ -7,6 +7,31 @@ export async function redirectionController(req: Request, res: Response){
     if(typeof shortenedUrl === "object"){
         return res.send("No such route exists")                
     }
+
+    const redisEntry = await redisClient.get(`url:${shortenedUrl}`)
+
+    if(!!redisEntry){
+        const redisUrl: {
+            originalUrl: string,
+            password: string | null,
+            expiresAt: Date | null,
+            userId: number,
+            id: number
+        } = await JSON.parse(redisEntry)
+
+        if(redisUrl.expiresAt && redisUrl.expiresAt <= new Date()){
+            return res.status(400).send("This URL has been expired")
+        }
+
+        if(!redisUrl.password){
+            await updateClick(shortenedUrl)
+            await updateVisitor(req, redisUrl)
+            await redisClient.del(`user:${redisUrl.userId}`)
+            return res.status(302).redirect(redisUrl.originalUrl)
+        }
+
+    }
+
     const url = await getUrlByShortCode(shortenedUrl)
     if(!url){
         return res.status(404).send("No such route exists")

@@ -5,8 +5,24 @@ import { loginController } from "./login/login.controller.ts";
 import { signOut } from "./signout/signout.controller.ts";
 import { getUser } from "../../middleware/getUser.ts";
 import { JWT_PAYLOAD } from "../../types/index.ts";
+import rateLimit from "express-rate-limit";
 
 export const authRouter = Router()
+
+const authApiLimit = rateLimit({
+    windowMs: 60*1000, // 1 minute
+    limit: 30,
+    standardHeaders: "draft-8",
+    legacyHeaders: false,
+    handler: (req, res, next, options) => {
+        return res.status(429).json({
+            success: false,
+            message: "Too many request, Please try again later.."
+        })
+    }
+})
+
+authRouter.use(authApiLimit)
 
 authRouter.post("/signup", asyncHandler(signUpcontroller))
 authRouter.post("/signin", asyncHandler(loginController))

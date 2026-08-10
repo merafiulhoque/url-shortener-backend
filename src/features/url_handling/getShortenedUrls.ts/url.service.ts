@@ -1,7 +1,7 @@
 import { prisma } from "../../../lib/db.ts"
 import { URLS, HelperResponse } from "../../../types/index.ts";
 
-export const GETAllShortenedURLS = async (id: number): Promise<HelperResponse<URLS[]>> => {
+export const GETAllShortenedURLS = async (id: number, skip: number, take: number): Promise<HelperResponse<URLS[]>> => {
     const isValidUser = await prisma.user.findUnique({
         where: {
             id: id
@@ -20,7 +20,12 @@ export const GETAllShortenedURLS = async (id: number): Promise<HelperResponse<UR
     const urls: URLS[] = await prisma.url.findMany({
         where: {
             userId: isValidUser.id,
-        }
+        },
+        orderBy: {
+            createdAt: "desc"
+        },
+        skip,
+        take,
     })
 
     return {

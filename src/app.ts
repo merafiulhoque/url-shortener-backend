@@ -22,6 +22,17 @@ app.use(cors({
     methods: ["GET", "POST",  "DELETE"]
 }))
 
+import { rateLimit } from "express-rate-limit"
+
+const globalLimit = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  limit: 100,               // 100 requests per IP
+  standardHeaders: "draft-8",
+  legacyHeaders: false,
+});
+
+app.use(globalLimit)
+
 // import and mount routers
 import { authRouter } from "./features/auth/router.ts";
 app.use("/api/auth/", authRouter)
