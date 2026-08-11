@@ -20,7 +20,9 @@ export const createNewShortenedURL = async (userId: number, payload: CreateUrl, 
         };
     }
 
-    if(!isValidUser.isPremium){
+    console.log(payload)
+
+    if(!!payload.customAlias && !isValidUser.isPremium){
         return {
             success: false,
             message: "To use custom alias, Please upgrade to premium"
@@ -41,7 +43,7 @@ export const createNewShortenedURL = async (userId: number, payload: CreateUrl, 
         }
     }
     
-    let shortenedUrl = payload.customAlias === "" ? shortURL() : `${payload.customAlias}/${shortURL()}`;
+    let shortenedUrl = (payload.customAlias === "") || (payload.customAlias === undefined) ? shortURL() : `${payload.customAlias}/${shortURL()}`;
     while(await doesExists(shortenedUrl)){
         shortenedUrl = shortURL();
     }
