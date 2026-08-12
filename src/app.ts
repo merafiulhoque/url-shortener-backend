@@ -35,7 +35,7 @@ app.use(globalLimit)
 
 // import and mount routers
 import { authRouter } from "./features/auth/router.ts";
-app.use("/api/auth/", authRouter)
+app.use("/api/auth", authRouter)
 
 //URL handling Router
 import { urlRouter } from "./features/url_handling/urlRouter.ts";

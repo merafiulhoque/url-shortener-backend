@@ -81,7 +81,7 @@ export const createNewShortenedURL = async (userId: number, payload: CreateUrl, 
     };
 }
 
-const shortURL = () => {
+export const shortURL = () => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result = '';
     const charactersLength = characters.length;
@@ -91,7 +91,7 @@ const shortURL = () => {
     return result;
 }
 
-const doesExists = async (shortUrl: string): Promise<boolean> => {
+export const doesExists = async (shortUrl: string): Promise<boolean> => {
     const url = await prisma.url.findUnique({
         where: {
             shortnedUrl: shortUrl,

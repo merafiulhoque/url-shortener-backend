@@ -20,6 +20,7 @@ model User {
   isPremium Boolean @default(false)
   urls Url[]
   payments Payment[]
+  bulkJob Bulkjob[]
   @@map("users")
 }
 
@@ -55,5 +56,19 @@ model Payment {
   orderId String
   status Boolean
   createdAt DateTime @default(now())
+}
+
+enum BulkJobStatus {
+  PROCESSING
+  COMPLETED
+  COMPLETED_WITH_ERRORS
+}
+
+model Bulkjob {
+  id Int @id @default(autoincrement())
+  userId Int 
+  user User @relation(fields: [userId], references: [id])
+  status BulkJobStatus
+  filePath String
 }
 

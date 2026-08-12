@@ -1,4 +1,5 @@
 import { JwtPayload } from "jsonwebtoken"
+import { BulkJobStatus } from "../generated/prisma/enums.ts"
 
 export interface HelperResponse<T> {
     success: boolean
@@ -80,4 +81,12 @@ export interface UrlStatData {
     createdAt: Date;
     expiresAt?: Date
     visitors?: Visitor[]
+}
+
+
+export interface BULK_JOB {
+    status: BulkJobStatus;
+    filePath: string;
+    id: number;
+    userId: number;
 }
