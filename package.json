@@ -8,9 +8,9 @@
   "main": "app.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
+    "build": "npx prisma generate && tsc",
     "start": "node dist/src/server.js",
-    "db:deploy": "npx prisma migrate deploy && npx prisma generate"
+    "db:deploy": "npx prisma migrate deploy"
   },
   "dependencies": {
     "@prisma/adapter-neon": "^7.8.0",
