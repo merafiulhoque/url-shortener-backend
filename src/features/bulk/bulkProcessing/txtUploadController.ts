@@ -1,7 +1,5 @@
 import { Request, Response } from "express";
 import { JWT_PAYLOAD } from "../../../types/index.ts";
-import { readTxtFile } from "./readTxtFile.ts";
-import { number } from "zod";
 import { bulkProcessor } from "./bulkProcessor.ts";
 import { prisma } from "../../../lib/db.ts";
 import { BulkJobStatus } from "../../../generated/prisma/enums.ts";

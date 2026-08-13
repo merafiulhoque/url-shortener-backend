@@ -45,6 +45,10 @@ app.use("/api/urls",urlRouter)
 import { uploadRouter } from "./features/uploads/router.ts";
 app.use("/api/uploads", uploadRouter)
 
+//import and mound bulk processing router
+import { bulkRouter } from "./features/bulk/router.ts";
+app.use("/api/urls/bulk", bulkRouter)
+
 //payment handling router
 import { paymentRouter } from "./features/payment/router.ts";
 app.use("/api/payments", paymentRouter)

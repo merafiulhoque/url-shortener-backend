@@ -29,6 +29,7 @@ model User {
   originalUrl String
   shortnedUrl String @unique
   password String?
+  isServingFile Boolean? @default(false)
   userId Int
   user User @relation(fields: [userId], references: [id])
   clicks Int @default(0)
