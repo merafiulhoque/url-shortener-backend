@@ -4,11 +4,11 @@ export const imageStorage = multer.memoryStorage()
 
 export const imageFileFilter : multer.Options["fileFilter"] = (req, file, cb) => {
     const allowedMimeTypes = [
-    "image/jpeg",
-    "image/jpg",
-    "image/png",
-    "image/webp",
-  ];
+      "image/jpeg",
+      "image/jpg",
+      "image/png",
+      "image/webp",
+    ];
   if(allowedMimeTypes.includes(file.mimetype)){
     cb(null, true)
   } else {
@@ -19,19 +19,21 @@ export const imageFileFilter : multer.Options["fileFilter"] = (req, file, cb) =>
 export const imageUpload = multer({
     storage: imageStorage,
     limits: {
-        fileSize: 500*1024
-    },
+        fileSize: 500*1024  //500KB
+    }, 
     fileFilter: imageFileFilter
 })
+
 
 export const txtStorage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, "public/uploads/")
   },
   filename: (req, file, callback) => {
-    callback(null, String(Date.now() + file.originalname))
+    callback(null, String(Date.now().toString() + file.originalname))
   },
 })
+
 
 export const txtUpload = multer({
   storage: txtStorage,
@@ -46,7 +48,4 @@ export const txtUpload = multer({
       callback(new Error("Invalid file type, only .txt files allowed"))
     }
   },
-  
 })
-
-

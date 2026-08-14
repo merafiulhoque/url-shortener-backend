@@ -71,5 +71,7 @@ model Bulkjob {
   user User @relation(fields: [userId], references: [id])
   status BulkJobStatus
   filePath String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 

@@ -83,10 +83,19 @@ export interface UrlStatData {
     visitors?: Visitor[]
 }
 
+export interface PROCESS_JOB{ 
+    status: BulkJobStatus;
+    filePath: string;
+    id: number;
+    userId: number;
+}
+
 
 export interface BULK_JOB {
     status: BulkJobStatus;
     filePath: string;
     id: number;
     userId: number;
+    createdAt: Date
+    updatedAt: Date
 }

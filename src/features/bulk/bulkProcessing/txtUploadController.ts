@@ -26,6 +26,12 @@ export async function txtUploadController(req: Request, res: Response){
             userId: user.id,
             status: BulkJobStatus.PROCESSING,
             filePath: req.file.path
+        },
+        select: {
+            id: true,
+            userId: true,
+            filePath: true,
+            status: true
         }
     })
 
