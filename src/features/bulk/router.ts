@@ -7,6 +7,7 @@ import { txtUploadController } from "./bulkProcessing/txtUploadController.ts";
 import { getJobs } from "./bulkJobDetails/getJobs.ts";
 import { getJobDetails } from "./BulkJob/getJobDetails.ts";
 import { getErrorLog } from "./error_log/getErrorLog.ts";
+import { deleteJob } from "./deleteBulkJob/deleteJob.ts";
 
 
 export const bulkRouter = Router()
@@ -16,5 +17,5 @@ bulkRouter.use(getUser, getUserWithDBCall)
 bulkRouter.post("/text", txtUpload.single("text"), asyncHandler(txtUploadController))
 bulkRouter.get("/jobs", asyncHandler(getJobs))
 bulkRouter.get("/jobs/:id", asyncHandler(getJobDetails))
-bulkRouter.delete("jobs/:id", asyncHandler(getJobDetails))
+bulkRouter.delete("jobs/:id", asyncHandler(deleteJob))
 bulkRouter.get("/jobs/error-log/:id", asyncHandler(getErrorLog))
