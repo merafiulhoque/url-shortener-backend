@@ -33,6 +33,15 @@ const globalLimit = rateLimit({
 
 app.use(globalLimit)
 
+// head && options
+app.head("/", (req, res) => {
+    return res.status(200).send("ok")
+})
+
+app.get("/", (req, res)=>{
+    return res.status(200).send("ok")
+})
+
 // import and mount routers
 import { authRouter } from "./features/auth/router.ts";
 app.use("/api/auth", authRouter)
